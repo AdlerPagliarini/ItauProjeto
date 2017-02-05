@@ -1,0 +1,43 @@
+﻿@model ItauProjeto.Models.ViewModelHome
+@{
+    ViewBag.Title = "Bem vindo ao portal do cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<div class="container-fluid centerSize">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Portal de clientes</h1>
+            <div>Efetue o login para acessar à area administrativa ou <a href="@Url.Action("Index","Cadastrar")">clique aqui</a> para fazer o cadastro</div>
+        </div>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm())
+            {
+            <div class="col-md-6 center">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.modelCliente.Email)
+                    @Html.TextBoxFor(model => model.modelCliente.Email, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.modelCliente.Email)
+                </div>
+                <div class="form-group noMarginBottom">
+                    @Html.LabelFor(model => model.modelCliente.Senha)
+                    @Html.TextBoxFor(model => model.modelCliente.Senha, null, new { @class = "form-control", type = "password", required = true, data_val_required = "Senha deve ser preenchida" })
+                    @Html.ValidationMessageFor(model => model.modelCliente.Senha)
+                </div>
+                <div class="checkbox fRightButton">
+                    @Html.CheckBoxFor(model => model.permanecerLogado) <span>Permanecer online</span>
+                </div>
+                <div class="clear"></div>
+                @Html.Raw(Model.respostaLogin)
+                <div class="clear"></div>
+                <input type="submit" class="btn btn-success fRightButton" value="Entrar">
+            </div>
+        }
+    </div>
+</div>

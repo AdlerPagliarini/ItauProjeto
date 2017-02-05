@@ -1,0 +1,41 @@
+﻿@model ItauProjeto.Models.ModelCliente
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script> @{ /*norender*/ }
+@{
+
+    AjaxOptions ajaxOptions = new AjaxOptions()
+    {
+        UpdateTargetId = "ajaxPartial",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "SuccessRequest", // ajax-js-functions.js
+        OnFailure = "FailRequest", // ajax-js-functions.js
+        HttpMethod = "POST"
+    };
+
+}
+<div id="excluindoCliente" class="excluindo excluindoFixed">
+    <p>
+        Atenção!
+    </p>
+    <div class="text">
+        Deseja realmente encerrar sua conta?
+    </div>
+    <div class="centro">
+        @using (Ajax.BeginForm("AjaxExcluirCliente", "Portal", ajaxOptions))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            if (Model != null && !string.IsNullOrEmpty(Model.id.ToString()))
+            {
+                @Html.HiddenFor(model => model.id)
+            }
+            <div class="form-group">
+                @Html.LabelFor(model => model.SenhaAtual)
+                @Html.TextBoxFor(model => model.SenhaAtual, null, new { @class = "form-control", type = "password", required = true, data_val_required = "Senha deve ser preenchida" })
+                @Html.ValidationMessageFor(model => model.SenhaAtual)
+            </div>
+            <div class="clear"></div>
+            <div id="btnConfirmCancelCliente" class="btn btn-danger fRightButton noMarginRight marginTop10">Cancelar</div>
+            <input type="submit" id="btnConfirmOkCliente" class="btn btn-success fRightButton noMarginRight marginTop10" value="Confirmar">
+        }
+    </div>
+</div>

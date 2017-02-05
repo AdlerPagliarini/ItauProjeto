@@ -1,0 +1,87 @@
+﻿@model ItauProjeto.Models.ViewModelPortal
+@{
+    ViewBag.Title = "Bem vindo ao portal do cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<div id="ajaxPartial">
+    @Html.Partial("LayoutAjaxExcluirCliente", Model.modelCliente)
+</div>
+<div class="container-fluid centerSize">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Bem vindo ao portal de cliente</h1>
+            <div>Gerencie sua conta. Clique sobre o menu superior "Gerenciar perfil" para visualizar as opções ou acesse as opções abaixo.</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 center">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <!-- Boxes de Acoes -->
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><img src="~/Content/images/edit.png" /></div>
+                    <div class="info">
+                        <h3 class="title">Editar perfil</h3>
+                        <p>
+                            Ao acessar o conteúdo desta página, você poderá visualizar e alterar seus dados cadastrais como também o comprovante de endereço.
+                        </p>
+                        <div class="more">
+                            <a href="@Url.Action("Editar", "Portal", new { id = Model.modelCliente.id })">Acessar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><img src="~/Content/images/password.png" /></div>
+                    <div class="info">
+                        <h3 class="title">Alterar seha</h3>
+                        <p>
+                            Para editar sua senha e email de acesso, acesse está opção.<br /><br />
+                        </p>
+                        <div class="more">
+                            <a href="@Url.Action("AlterarSenha", "Portal", new { id = Model.modelCliente.id })">
+                                Acessar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-lg-4">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><img src="~/Content/images/delete.png" /></div>
+                    <div class="info">
+                        <h3 class="title">Encerrar conta</h3>
+                        <p>
+                            Caso deseje excluir seu perfil e seu comprovante de endereço, clique no botão "encerrar conta" que um popup será mostrado para você.
+                        </p>
+                        <div class="more">
+                            <a onclick="excluindoCliente();" class="pointer">
+                                Encerrar minha conta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
+        </div>
+        <!-- /Boxes de Acoes -->
+    </div>
+</div>

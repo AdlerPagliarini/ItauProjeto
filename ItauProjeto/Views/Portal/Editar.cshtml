@@ -1,0 +1,96 @@
+﻿@model ItauProjeto.Models.ModelCliente
+@{
+    ViewBag.Title = "Editar dados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/mask")
+    @Scripts.Render("~/bundles/autocep")
+}
+
+<div id="ajaxPartial">
+    @Html.Partial("LayoutAjaxExcluirCliente", Model)
+</div>
+<div class="container-fluid centerSize">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Atualização de dados cadastrais</h1>
+            <div>Atualize as informações do seu cadastro</div>
+        </div>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("Editar", "Portal", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class="col-md-6">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (Model != null && !string.IsNullOrEmpty(Model.id.ToString()))
+                {
+                    @Html.HiddenFor(model => model.id)
+                }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome)
+                    @Html.TextBoxFor(model => model.Nome, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.TextBoxFor(model => model.Email, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataNascimento)
+                    @Html.TextBoxFor(model => model.DataNascimento, null, new { @Value = Model.DataNascimento.ToString("d"), @class = "form-control simple-field-data-mask", data_mask = "00/00/0000" })
+                    @Html.ValidationMessageFor(model => model.DataNascimento)
+                </div>
+                <div class="form-group col-md-4 noPaddingLeft">
+                    @Html.LabelFor(model => model.CEP)
+                    @Html.TextBoxFor(model => model.CEP, null, new { @class = "form-control simple-field-data-mask", data_mask = "00000-000" })
+                    @Html.ValidationMessageFor(model => model.CEP)
+                </div>
+                <div class="form-group col-md-4 noPaddingLeft">
+                    @Html.LabelFor(model => model.Estado)
+                    @Html.TextBoxFor(model => model.Estado, null, new { @class = "form-control simple-field-data-mask", data_mask = "AA" })
+                    @Html.ValidationMessageFor(model => model.Estado)
+                </div>
+                <div class="clear"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Cidade)
+                    @Html.TextBoxFor(model => model.Cidade, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Cidade)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Bairro)
+                    @Html.TextBoxFor(model => model.Bairro, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Bairro)
+                </div>
+            </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Endereco)
+                        @Html.TextBoxFor(model => model.Endereco, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Endereco)
+                    </div>
+                    <div class="form-group col-md-4 noPaddingLeft">
+                        @Html.LabelFor(model => model.Numero)
+                        @Html.TextBoxFor(model => model.Numero, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Numero)
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        <div class="clear"></div>
+                        <div style="padding:20px 0 0 0;">
+                            Visualize seu comprovante cadastrado <a href="~/Upload/@Model.id/@Model.NomeDoArquivo" target="_blank">clique aqui</a>@Html.HiddenFor(model => model.NomeDoArquivo)
+                        </div>
+                        <div>Para atualizar seu @Html.LabelFor(model => model.ComprovanteEndereco) Selecione um novo arquivo.</div>
+                        @Html.TextBoxFor(model => model.ComprovanteEndereco, null, new { @class = "form-control", type = "file" })
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <a href="@Url.Action("Index", "Portal", new { id = Model.id })" class="btn btn-danger fRightButton">Cancelar</a>
+                <input type="submit" class="btn btn-success fRightButton marginRight" value="Atualizar">
+        }
+    </div>
+</div>

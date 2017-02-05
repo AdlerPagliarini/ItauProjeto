@@ -1,0 +1,110 @@
+﻿@model ItauProjeto.Models.ModelCliente
+
+@{
+    ViewBag.Title = "Cadastro de cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/mask")
+    @Scripts.Render("~/bundles/autocep")
+}
+<div class="container-fluid centerSize">
+    <div class="row">
+        <div class="jumbotron">
+            @if (!HttpContext.Current.Request.RequestContext.RouteData.Values.ContainsKey("id"))
+            {
+                <h1>Cadastro de cliente</h1>
+                <div>Preencha todos os campos abaixo para efetuar o seu cadastro.</div>
+            }
+            else
+            {
+                <h1>Cadastro realizado com sucesso</h1>
+                <div>Acesse a página de login para efetuar seu acesso. <a href="@Url.Action("Index","Home")">Clique aqui</a></div>
+            }
+        </div>
+    </div>
+    @if (!HttpContext.Current.Request.RequestContext.RouteData.Values.ContainsKey("id"))
+    {
+        <div class="row">
+            @using (Html.BeginForm("Index", "Cadastrar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-md-6">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @if (Model != null && !string.IsNullOrEmpty(Model.id.ToString()))
+                    {
+                        @Html.HiddenFor(model => model.id)
+                    }
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome)
+                        @Html.TextBoxFor(model => model.Nome, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Nome)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DataNascimento)
+                        @Html.TextBoxFor(model => model.DataNascimento, null, new { @Value = "", @class = "form-control simple-field-data-mask", data_mask = "00/00/0000" })
+                        @Html.ValidationMessageFor(model => model.DataNascimento)
+                    </div>
+                    <div class="form-group col-md-4 noPaddingLeft">
+                        @Html.LabelFor(model => model.CEP)
+                        @Html.TextBoxFor(model => model.CEP, null, new { @class = "form-control simple-field-data-mask", data_mask = "00000-000" })
+                        @Html.ValidationMessageFor(model => model.CEP)
+                    </div>
+                    <div class="form-group col-md-4 noPaddingLeft">
+                        @Html.LabelFor(model => model.Estado)
+                        @Html.TextBoxFor(model => model.Estado, null, new { @class = "form-control simple-field-data-mask", data_mask = "AA" })
+                        @Html.ValidationMessageFor(model => model.Estado)
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Cidade)
+                        @Html.TextBoxFor(model => model.Cidade, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Cidade)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Bairro)
+                        @Html.TextBoxFor(model => model.Bairro, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Bairro)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Endereco)
+                        @Html.TextBoxFor(model => model.Endereco, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Endereco)
+                    </div>
+                    <div class="form-group col-md-4 noPaddingLeft">
+                        @Html.LabelFor(model => model.Numero)
+                        @Html.TextBoxFor(model => model.Numero, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Numero)
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ComprovanteEndereco)
+                        @Html.TextBoxFor(model => model.ComprovanteEndereco, null, new { @class = "form-control", type = "file", required = true, data_val_required = "Faça o upload do comprovante de endereço" })
+                        @Html.ValidationMessageFor(model => model.ComprovanteEndereco)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Senha)
+                        @Html.TextBoxFor(model => model.Senha, null, new { @class = "form-control", type = "password", required = true, data_val_required = "Senha deve ser preenchida" })
+                        @Html.ValidationMessageFor(model => model.Senha)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmarSenha)
+                        @Html.TextBoxFor(model => model.ConfirmarSenha, null, new { @class = "form-control", type = "password", required = true, data_val_required = "Confirmar senha deve ser preenchida" })
+                        @Html.ValidationMessageFor(model => model.ConfirmarSenha)
+                    </div>
+                    <div class="clear"></div>
+                    <input type="submit" class="btn btn-success fRightButton" value="Cadastrar">
+                </div>
+            }
+        </div>
+    }
+
+</div>
