@@ -15,8 +15,8 @@ Auxiliary softwares were used for design, like Adobe Photoshop CS6 and Adobe Dre
 The back-end programming was performed in <b>C#</b> language. The gerenation of Html tags, forms and display data models were performed by <b>Razor</b> engine.
 </br></br>
 The front-end was developed using the framework <b>bootstraps</b> version 3.3.7.
-Also were added some plugins to facilitate the insertion of data as masks [1] and self-completion for street address[2].
-</br>
+Also were added some plugins to facilitate the insertion of data as masks[1] and self-completion for street address[2].
+</br></br>
 [1] - https://plugins.jquery.com/mask/
 [2] - http://apps.widenet.com.br/
 
