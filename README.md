@@ -1,7 +1,7 @@
 # ItauProjeto
 <h1>Rating test for Low Platform Developer</h1>
 
-<b>Main points of the task</b>
+<b>Main task points</b>
 </br>1. Create an application, in any language, to allow the client to open an online account, they must be
 personal data and the image of proof of residence.
 </br>2. The application shall allow the recording, editing, deletion and consultation of data saved in a database, which
